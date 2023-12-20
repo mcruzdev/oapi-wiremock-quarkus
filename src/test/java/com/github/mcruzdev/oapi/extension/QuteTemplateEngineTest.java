@@ -1,5 +1,6 @@
 package com.github.mcruzdev.oapi.extension;
 
+import io.swagger.v3.oas.models.PathItem;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -20,6 +21,7 @@ class QuteTemplateEngineTest {
                 List.of(
                         new WiremockStub.Builder()
                                 .id("GET_USERS")
+                                .method(PathItem.HttpMethod.GET.name())
                                 .url("/api/v1/users")
                                 .build()
                 )

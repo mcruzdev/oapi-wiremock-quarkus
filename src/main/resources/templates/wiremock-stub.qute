@@ -5,7 +5,7 @@ public class OpenApiWiremockStubs {
 
     {#for stub in wiremockStubs}
        public static final String {stub.id}_URL = "{stub.url}";
-       public static final MappingBuilder MAPPING_BUILDER_{stub.id} = WireMock.get(WireMock.urlEqualTo({stub.id}_URL))
+       public static final MappingBuilder MAPPING_BUILDER_{stub.id} = WireMock.{stub.method.toLowerCase}(WireMock.urlEqualTo({stub.id}_URL))
                    .willReturn(WireMock.aResponse());
 
     {/for}

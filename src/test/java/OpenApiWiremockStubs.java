@@ -6,6 +6,4 @@ public class OpenApiWiremockStubs {
     public static final String GET_USERS_URL = "/api/v1/users";
     public static final MappingBuilder MAPPING_BUILDER_GET_USERS = WireMock.get(WireMock.urlEqualTo(GET_USERS_URL))
             .willReturn(WireMock.aResponse());
-
-
 }

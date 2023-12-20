@@ -4,6 +4,7 @@ public class WiremockStub {
 
     private String url;
     private String id;
+    private String method;
 
     public String getUrl() {
         return this.url;
@@ -13,9 +14,14 @@ public class WiremockStub {
         return this.id;
     }
 
+    public String getMethod() {
+        return this.method;
+    }
+
     public static class Builder {
         private String url;
         private String id;
+        private String method;
 
         public Builder url(String url) {
             this.url = url;
@@ -27,10 +33,16 @@ public class WiremockStub {
             return this;
         }
 
+        public Builder method(final String method) {
+            this.method = method;
+            return this;
+        }
+
         public WiremockStub build() {
             WiremockStub stub = new WiremockStub();
             stub.url = this.url;
             stub.id = this.id;
+            stub.method = this.method;
             return stub;
         }
     }

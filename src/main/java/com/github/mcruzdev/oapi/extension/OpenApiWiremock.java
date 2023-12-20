@@ -30,19 +30,34 @@ public class OpenApiWiremock {
 
         OpenAPI openAPI = openApi.orElseThrow(() -> new OpenApiWiremockGeneralException("OpenAPI spec is invalid"));
 
-        List<WiremockStub> wiremockStubs = new ArrayList<>();
-
         Set<Map.Entry<String, PathItem>> entries = openAPI.getPaths().entrySet();
 
+        List<WiremockStub> wiremockStubs = new ArrayList<>();
+
         for (Map.Entry<String, PathItem> entry : entries) {
-            for (Operation operation : entry.getValue().readOperations()) {
-                wiremockStubs.add(new WiremockStub.Builder()
-                        .id(operation.getOperationId())
-                        .url(OpenApiWiremockUrl.create(entry.getKey(), operation))
-                        .build());
-            }
+            wiremockStubs = generateWiremockStubs(entry);
         }
 
+        return wiremockStubs;
+    }
+
+    private static List<WiremockStub> generateWiremockStubs(Map.Entry<String, PathItem> entries) {
+        List<WiremockStub> wiremockStubs = new ArrayList<>();
+        String pathName = entries.getKey();
+        PathItem pathItem = entries.getValue();
+
+        for (Map.Entry<PathItem.HttpMethod, Operation> entry : pathItem.readOperationsMap().entrySet()) {
+            PathItem.HttpMethod httpMethod = entry.getKey();
+            Operation operation = entry.getValue();
+
+            WiremockStub wiremockStub = new WiremockStub.Builder()
+                    .id(operation.getOperationId())
+                    .url(OpenApiWiremockUrl.create(pathName, operation))
+                    .method(httpMethod.name())
+                    .build();
+
+            wiremockStubs.add(wiremockStub);
+        }
         return wiremockStubs;
     }
 
