@@ -115,7 +115,7 @@ class OpenApiWiremockTest {
         // then
         assertEquals(2, stub.size());
 
-        assertEquals("GET_USERS", stub.get(0).getId());
-        assertEquals("UPDATE_USERS", stub.get(1).getId());
+        assertEquals("GETUSERS", stub.get(0).getId());
+        assertEquals("UPDATEUSERS", stub.get(1).getId());
     }
 }

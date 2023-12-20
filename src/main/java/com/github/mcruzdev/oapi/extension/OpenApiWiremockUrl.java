@@ -15,7 +15,7 @@ public class OpenApiWiremockUrl {
 
     static String create(final String url, final Operation operation) {
 
-        String finalUrl = "";
+        String finalUrl = url;
 
         List<Parameter> parameters = operation.getParameters();
 
