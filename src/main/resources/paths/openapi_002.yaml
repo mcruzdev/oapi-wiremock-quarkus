@@ -1,0 +1,23 @@
+openapi: 3.0.1
+info:
+  version: 1.0.0
+  title: "OpenAPI to Wiremock"
+paths:
+  /api/v1/users/{userId}:
+    get:
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+      summary: Get users
+      operationId: getUsers
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "All users"
